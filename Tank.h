@@ -5,12 +5,16 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QGraphicsRectItem>
-class Tank : public QObject
+#include <QGraphicsPixmapItem>
+#include <QKeyEvent>
+#include <QWidget>
+class Tank : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit Tank(QObject *parent = nullptr);
-
+    Tank();
+    QRectF boundingRect() const;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void keyPressEvent(QKeyEvent* keyEvent);
 signals:
 
 };
