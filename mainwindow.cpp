@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QPixmap bkgnd(":Images/gamemenu.jpg");
+    QPixmap bkgnd(":Images/menu.png");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
@@ -15,8 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     audio = new QAudioOutput();
     music->setSource(QUrl("qrc:/Sounds/backgroundMusic.mp3"));
     music->setAudioOutput(audio);
-    connect(music, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
-    audio->setVolume(40);
+    audio->setVolume(20);
 
     music->play();
     music->setLoops(QMediaPlayer::Infinite);
@@ -34,7 +33,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     auto optionView = new Dialog();
-    music->stop();
+
     optionView->show();
 
     close();

@@ -4,8 +4,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QTimer>
-
-#include "mainwindow.h"
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 class View : public QGraphicsView
 {

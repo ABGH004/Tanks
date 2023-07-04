@@ -9,19 +9,27 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Bricks.cpp \
     Bullet.cpp \
     Dialog.cpp \
+    Forest.cpp \
+    Map.cpp \
     Tank.cpp \
     View.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    myBox.cpp
 
 HEADERS += \
+    Bricks.h \
     Bullet.h \
     Dialog.h \
+    Forest.h \
+    Map.h \
     Tank.h \
     View.h \
-    mainwindow.h
+    mainwindow.h \
+    myBox.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

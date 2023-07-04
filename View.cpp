@@ -1,6 +1,9 @@
 #include "View.h"
 #include "Tank.h"
-#include "Bullet.h"
+#include "Bricks.h"
+#include "myBox.h"
+#include "Forest.h"
+//#include "Map.h"
 View::View()
 {
 
@@ -10,9 +13,19 @@ View::View()
     setFixedSize(1350, 750);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    QMediaPlayer *music = new QMediaPlayer();
+    QAudioOutput *audio = new QAudioOutput();
+    music->setSource(QUrl("qrc:/Sounds/startsound.wav"));
+    music->setAudioOutput(audio);
+    music->play();
+
     Tank *t1 = new Tank(100, 100, 3);
+    Bricks *b = new Bricks(1000, 500);
+    myBox *bx = new myBox(500, 500, 5);
+    Forest *f = new Forest(1000, 50);
 
     scene->addItem(t1);
-//    Bullet *b1 = new Bullet();
-//    scene->addItem(b1);
+    scene->addItem(b);
+    scene->addItem(bx);
+    scene->addItem(f);
 }

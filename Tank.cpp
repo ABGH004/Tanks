@@ -5,7 +5,6 @@ Tank::Tank(qreal xPos, qreal yPos, int velocity)
 {
     this->velocity = velocity;
 
-    setFlag(ItemIsMovable);
     setFlag(ItemIsFocusable);
     setFocus();
 
@@ -21,11 +20,9 @@ QRectF Tank::boundingRect() const
 
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-//    QRectF rect = boundingRect();
     QPainterPath body;
-//    body.setFillRule(Qt::WindingFill);
-//    int x = 0;
-//    int y = 0;
+    body.setFillRule(Qt::WindingFill);
+
     body.addRect(15, 4, 48, 40);
 
     QPainterPath canon;
@@ -34,7 +31,6 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     wheel1.addRect(25, 0, 30, 4);
     QPainterPath wheel2;
     wheel2.addRect(25, 44, 30, 4);
-//    QPainterPath FillPath = body.subtracted(canon).subtracted(wheel1).subtracted(wheel2);
 
     painter->setRenderHint(QPainter::Antialiasing);
     painter->fillPath(body, Qt::red);
@@ -68,9 +64,8 @@ void Tank::keyPressEvent(QKeyEvent* keyEvent){
             break;
         case(Qt::Key_C):
             Bullet *bullet = new Bullet();
-            bullet->setPos(mapToScene(50, 20));
+            bullet->setPos(mapToScene(70, 22.5));
             bullet->setRotation(rotation());
-//            bullet->setPos(x() + 50, y() + 20);
             scene()->addItem(bullet);
     }
 //    if(keyEvent->key() == Qt::Key_Right){

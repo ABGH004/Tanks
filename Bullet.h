@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QAudioOutput>
 #include <QMediaPlayer>
+#include <QList>
 class Bullet : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT

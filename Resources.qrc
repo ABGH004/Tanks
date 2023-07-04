@@ -2,14 +2,20 @@
     <qresource prefix="/Images">
         <file>box.jpg</file>
         <file>bricks.png</file>
-        <file>forest.jpg</file>
         <file>gamemenu.jpg</file>
         <file>menu.png</file>
         <file>icon.ico</file>
+        <file>forest.jpg</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>backgroundMusic.mp3</file>
         <file>startsound.wav</file>
         <file>shootingSound.wav</file>
+        <file>winnerMusic.wav</file>
+    </qresource>
+    <qresource prefix="/Maps">
+        <file>map_1.txt</file>
+        <file>map_2.txt</file>
+        <file>map_3.txt</file>
     </qresource>
 </RCC>
