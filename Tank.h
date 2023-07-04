@@ -8,10 +8,15 @@
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
 #include <QWidget>
+#include <QTransform>
 class Tank : public QGraphicsItem
 {
+private:
+    int velocity;
+    int HP;
+    int strength;
 public:
-    Tank();
+    Tank(qreal, qreal, int);
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     void keyPressEvent(QKeyEvent* keyEvent);

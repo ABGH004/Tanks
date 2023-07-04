@@ -1,28 +1,16 @@
 #include "Tank.h"
-
-//    QPainterPath OuterPath;
-//    OuterPath.setFillRule(Qt::WindingFill);
-//    OuterPath.addEllipse(QPointF(60, 60), 50, 50);
-//    OuterPath.addRect(60, 10, 50, 50);
-
-//    QPainterPath InnerPath;
-//    InnerPath.addEllipse(QPointF(60, 60), 20, 20);
-
-//    QPainterPath FillPath = OuterPath.subtracted(InnerPath);
-
-//    QPainter Painter(this);
-//    Painter.setRenderHint(QPainter::Antialiasing);
-
-//    Painter.fillPath(FillPath, Qt::blue);
-//    Painter.strokePath(OuterPath.simplified(), QPen(Qt::black, 1));
-//    Painter.strokePath(InnerPath, QPen(Qt::black, 3));
-
-
-Tank::Tank()
+#include "Bullet.h"
+#include <QGraphicsScene>
+Tank::Tank(qreal xPos, qreal yPos, int velocity)
 {
+    this->velocity = velocity;
+
     setFlag(ItemIsMovable);
     setFlag(ItemIsFocusable);
     setFocus();
+
+    setPos(xPos, yPos);
+    setTransformOriginPoint(boundingRect().center() + QPoint(-20, -20));
 }
 
 QRectF Tank::boundingRect() const
@@ -33,42 +21,72 @@ QRectF Tank::boundingRect() const
 
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF rect = boundingRect();
+//    QRectF rect = boundingRect();
     QPainterPath body;
-    body.setFillRule(Qt::WindingFill);
-    body.addRect(30, 20, 50, 50);
+//    body.setFillRule(Qt::WindingFill);
+//    int x = 0;
+//    int y = 0;
+    body.addRect(15, 4, 48, 40);
 
     QPainterPath canon;
-    canon.addRect(20, 35, 25, 15);
+    canon.addRect(48, 19, 25, 10);
     QPainterPath wheel1;
-    wheel1.addRect(42.5, 15, 25, 5);
+    wheel1.addRect(25, 0, 30, 4);
     QPainterPath wheel2;
-    wheel2.addRect(42.5, 70, 25, 5);
-    QPainterPath FillPath = body.subtracted(canon).subtracted(wheel1).subtracted(wheel2);
+    wheel2.addRect(25, 44, 30, 4);
+//    QPainterPath FillPath = body.subtracted(canon).subtracted(wheel1).subtracted(wheel2);
 
     painter->setRenderHint(QPainter::Antialiasing);
-
     painter->fillPath(body, Qt::red);
     painter->fillPath(canon, Qt::black);
     painter->fillPath(wheel1, Qt::black);
     painter->fillPath(wheel2, Qt::black);
     painter->strokePath(body.simplified(), QPen(Qt::black, 1));
-    painter->strokePath(canon, QPen(Qt::black, 3));
+    painter->strokePath(canon, QPen(Qt::black, 1));
 
 
 }
 
 void Tank::keyPressEvent(QKeyEvent* keyEvent){
-    if(keyEvent->key() == Qt::Key_Right){
-        setPos(x() + 10, y());
+    switch(keyEvent->key()){
+        case(Qt::Key_D):
+            setPos(x() + velocity*3, y());
+            setRotation(360);
+            break;
+        case(Qt::Key_A):
+            setPos(x() - velocity*3, y());
+            setRotation(180);
+            break;
+
+        case(Qt::Key_W):
+            setPos(x(), y() - velocity*3);
+            setRotation(270);
+            break;
+        case(Qt::Key_S):
+            setPos(x(), y() + velocity*3);
+            setRotation(90);
+            break;
+        case(Qt::Key_C):
+            Bullet *bullet = new Bullet();
+            bullet->setPos(mapToScene(50, 20));
+            bullet->setRotation(rotation());
+//            bullet->setPos(x() + 50, y() + 20);
+            scene()->addItem(bullet);
     }
-    if(keyEvent->key() == Qt::Key_Left){
-        setPos(x() - 10, y());
-    }
-    if(keyEvent->key() == Qt::Key_Up){
-        setPos(x(), y() - 10);
-    }
-    if(keyEvent->key() == Qt::Key_Down){
-        setPos(x(), y() + 10);
-    }
+//    if(keyEvent->key() == Qt::Key_Right){
+//        setPos(x() + velocity*3, y());
+//        setRotation(180);
+//    }
+//    if(keyEvent->key() == Qt::Key_Left){
+//        setPos(x() - velocity*3, y());
+//        setRotation(360);
+//    }
+//    if(keyEvent->key() == Qt::Key_Up){
+//        setPos(x(), y() - velocity*3);
+//        setRotation(90);
+//    }
+//    if(keyEvent->key() == Qt::Key_Down){
+//        setPos(x(), y() + velocity*3);
+//        setRotation(270);
+//    }
 }

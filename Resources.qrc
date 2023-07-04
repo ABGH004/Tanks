@@ -10,5 +10,6 @@
     <qresource prefix="/Sounds">
         <file>backgroundMusic.mp3</file>
         <file>startsound.wav</file>
+        <file>shootingSound.wav</file>
     </qresource>
 </RCC>
