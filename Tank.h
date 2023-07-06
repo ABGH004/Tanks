@@ -9,8 +9,10 @@
 #include <QKeyEvent>
 #include <QWidget>
 #include <QTransform>
-class Tank : public QGraphicsItem
+#include <QTimer>
+class Tank : public QObject, public QGraphicsPixmapItem
 {
+    Q_OBJECT
 private:
     int velocity;
     int HP;
@@ -20,6 +22,10 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     void keyPressEvent(QKeyEvent* keyEvent);
+    QPainterPath shape() const;
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+public slots:
+    void collision();
 signals:
 
 };

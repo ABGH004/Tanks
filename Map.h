@@ -2,7 +2,8 @@
 #define MAP_H
 #include <QGraphicsPixmapItem>
 #include <QObject>
-class Map : public QObject, public QGraphicsPixmapItem
+#include <QPainter>
+class Map : public QObject, public QGraphicsPixmapItem, public QPainter
 {
     Q_OBJECT
 private:

@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QLabel>
 
 class View : public QGraphicsView
 {
@@ -13,6 +14,8 @@ class View : public QGraphicsView
 private:
     QGraphicsScene * scene;
     QTimer* viewTimer;
+    QLabel *playerA;
+    QLabel *playerB;
 public:
 
     explicit View();

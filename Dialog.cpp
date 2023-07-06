@@ -11,6 +11,8 @@ Dialog::Dialog(QWidget *parent) :
     QPalette palette;
     palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
+//    ui->comboBox->currentTextChanged();
+
 }
 
 Dialog::~Dialog()

@@ -39,6 +39,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     Resources.qrc
 
+RC_ICONS = icon.ico
 FORMS += \
     Dialog.ui \
     mainwindow.ui

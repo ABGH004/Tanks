@@ -18,12 +18,21 @@ Bullet::Bullet()
     timer->start(100);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 }
+QPainterPath Bullet::shape() const{
+    QPainterPath path;
+    path.moveTo(2.5, 0);
+    path.lineTo(15, 0);
+    path.lineTo(17.5, 2.5);
+    path.lineTo(15, 5);
+    path.lineTo(2.5, 5);
+    path.addEllipse(0, 0, 5, 5);
+    return path;
+}
 QRectF Bullet::boundingRect() const
 {
     // outer most edges
     return QRectF(0,0,15,5);
 }
-
 void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPainterPath body;
@@ -48,13 +57,11 @@ void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 void Bullet::move(){
 
     QList<QGraphicsItem*> collidingList = collidingItems();
-    //why qpainter does not detect collision with pixmap
+
     for(int i = 0; i < collidingList.size(); ++i){
-        qDebug() << "collision accuared";
         if(typeid(*(collidingList[i])) == typeid(Bricks)){
             scene()->removeItem(this);
             delete this;
-            qDebug() << "collision accuared";
             return;
         }
 
@@ -62,8 +69,11 @@ void Bullet::move(){
             dynamic_cast<myBox*>(collidingList[i])->decrementLives();
             scene()->removeItem(this);
             delete this;
-            qDebug() << "collision accuared";
             return;
+        }
+        else{
+            qDebug() << "collision occured";
+
         }
     }
     setPos(mapToScene(35, 0));

@@ -9,6 +9,7 @@
 
 Map::Map(char* mapName)
 {
+
     this->mapName = mapName;
     std::ifstream file;
     file.open(mapName);
@@ -25,8 +26,8 @@ Map::Map(char* mapName)
     for(int i = 0; i < 13; ++i)
         for(int j = 0; j < 27; ++j){
             if(array[i][j] == "1"){
-                Bricks *bricks = new Bricks(i*50, 100 + j*50);
-                scene()->addItem(bricks);
+                QImage a(":/Images/bricks.png");
+
             }
         }
 
