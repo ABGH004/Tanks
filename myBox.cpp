@@ -1,15 +1,16 @@
 #include "myBox.h"
 #include <QGraphicsScene>
-myBox::myBox(qreal x, qreal y, int lives)
+myBox::myBox(qreal x, qreal y)
 {
-    this->lives = lives;
+    this->lives = 10;
     setPixmap(QPixmap(":/Images/box.jpg"));
     setPos(x, y);
 }
 
-void myBox::decrementLives(){
-    --lives;
-    if(lives == 0){
+void myBox::decrementLives(int strength){
+
+    lives -= strength;
+    if(lives <= 0){
         scene()->removeItem(this);
         delete this;
     }

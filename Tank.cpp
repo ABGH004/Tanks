@@ -1,9 +1,8 @@
 #include "Tank.h"
 #include "Bullet.h"
 #include <QGraphicsScene>
-Tank::Tank(qreal xPos, qreal yPos, int velocity)
+Tank::Tank(qreal xPos, qreal yPos)
 {
-    this->velocity = velocity;
 
     setFlags(ItemIsFocusable | ItemSendsScenePositionChanges);
     setFocus();
@@ -12,12 +11,22 @@ Tank::Tank(qreal xPos, qreal yPos, int velocity)
     setTransformOriginPoint(boundingRect().center() + QPoint(-20, -20));
     timer->start(10);
     connect(timer, SIGNAL(timeout()), this, SLOT(collision()));
+    connect(this, &Tank::destroyed, this, [this](){
+        gameOver();
+    });
 }
 
 QRectF Tank::boundingRect() const
 {
 // outer most edges
     return QRectF(0,0,100,100);
+}
+
+void Tank::setInfo(int HP, int velocity, int strength, QString color){
+    this->velocity = velocity;
+    this->HP = HP;
+    this->strength = strength;
+    this->color = color;
 }
 
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -35,7 +44,16 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     wheel2.addRect(25, 44, 30, 4);
 
     painter->setRenderHint(QPainter::Antialiasing);
-    painter->fillPath(body, Qt::red);
+    if(color == "Red")
+        painter->fillPath(body, Qt::red);
+    if(color == "Blue")
+        painter->fillPath(body, Qt::blue);
+    if(color == "Green")
+        painter->fillPath(body, Qt::green);
+    if(color == "White")
+        painter->fillPath(body, Qt::white);
+    if(color == "Yellow")
+        painter->fillPath(body, Qt::yellow);
     painter->fillPath(canon, Qt::black);
     painter->fillPath(wheel1, Qt::black);
     painter->fillPath(wheel2, Qt::black);
@@ -55,24 +73,24 @@ void Tank::keyPressEvent(QKeyEvent* keyEvent){
     }
     switch(keyEvent->key()){
         case(Qt::Key_D):
-            setPos(x() + velocity*3, y());
+            setPos(x() + velocity*5, y());
             setRotation(360);
             break;
         case(Qt::Key_A):
-            setPos(x() - velocity*3, y());
+            setPos(x() - velocity*5, y());
             setRotation(180);
             break;
 
         case(Qt::Key_W):
-            setPos(x(), y() - velocity*3);
+            setPos(x(), y() - velocity*5);
             setRotation(270);
             break;
         case(Qt::Key_S):
-            setPos(x(), y() + velocity*3);
+            setPos(x(), y() + velocity*5);
             setRotation(90);
             break;
         case(Qt::Key_C):
-            Bullet *bullet = new Bullet();
+            Bullet *bullet = new Bullet(strength);
             bullet->setPos(mapToScene(85, 22.5));
             bullet->setRotation(rotation());
             scene()->addItem(bullet);
@@ -125,7 +143,6 @@ void Tank::collision()
                 setY(y() - 20);
             }
         }
-//            setRotation(90);
     }
 
 }
@@ -161,5 +178,21 @@ QVariant Tank::itemChange(GraphicsItemChange change, const QVariant &value)
 //        }
     }
     return QGraphicsItem::itemChange(change, value);
+}
+
+void Tank::getHit(int bulletStr)
+{
+    QMediaPlayer *music = new QMediaPlayer();
+    QAudioOutput *audio = new QAudioOutput();
+    music->setSource(QUrl("qrc:/Sounds/hitSound.wav"));
+    music->setAudioOutput(audio);
+    audio->setVolume(0.2);
+    music->play();
+    HP -= (bulletStr * 2);
+    if(HP <= 0){
+
+        delete this;
+
+    }
 }
 

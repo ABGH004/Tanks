@@ -24,8 +24,11 @@ signals:
     void passText1(QString playerName);
     void passText2(QString playerName);
     void passInfo1(int info, QString color);
+    void passInfo2(int info, QString color);
+    void restart();
 public slots:
     void getInfo(int HP, int Strength, int Velocity, QString name);
+    void getRestart();
 private slots:
     void on_pushButton_clicked();
 

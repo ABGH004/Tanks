@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     audio = new QAudioOutput();
     music->setSource(QUrl("qrc:/Sounds/backgroundMusic.mp3"));
     music->setAudioOutput(audio);
-    audio->setVolume(20);
+    audio->setVolume(0.4);
 
     music->play();
     music->setLoops(QMediaPlayer::Infinite);
@@ -30,15 +30,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::restartGame()
+{
+    show();
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     auto optionView = new Dialog();
 
     connect(this, &MainWindow::passInfo, optionView, &Dialog::getInfo);
-
+    connect(optionView, &Dialog::restart, this, &MainWindow::restartGame);
     emit passInfo(HP, Strength, Velocity, name);
     optionView->show();
-    close();
+    hide();
 }
 
 void MainWindow::getInf(int HP, int Strength, int Velocity, QString name)

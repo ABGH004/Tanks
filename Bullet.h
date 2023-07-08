@@ -12,13 +12,15 @@ class Bullet : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Bullet();
+    Bullet(int strength);
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
     QPainterPath shape() const;
 public slots:
     void move();
+private:
+    int strength;
 };
 
 #endif // BULLET_H

@@ -79,7 +79,7 @@
    </item>
    <item>
     <property name="text">
-     <string>Black</string>
+     <string>Yellow</string>
     </property>
    </item>
   </widget>
@@ -277,6 +277,41 @@
     </rect>
    </property>
   </widget>
+  <widget class="QComboBox" name="comboBox_5">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>270</y>
+     <width>281</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <item>
+    <property name="text">
+     <string>Tank A ( HP : 135 , STR : 3 , V : 2 ) </string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tank B ( HP : 100 , STR : 1 , V : 3 )  </string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tank C ( HP : 150 , STR : 5 , V : 1 ) </string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tank D ( HP : 120 , STR : 2 , V : 2 ) </string>
+    </property>
+   </item>
+  </widget>
   <widget class="QComboBox" name="comboBox_2">
    <property name="geometry">
     <rect>
@@ -313,42 +348,7 @@
    </item>
    <item>
     <property name="text">
-     <string>Black</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="comboBox_5">
-   <property name="geometry">
-    <rect>
-     <x>1010</x>
-     <y>270</y>
-     <width>281</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <item>
-    <property name="text">
-     <string>Tank A ( HP : 135 , STR : 3 , V : 2 ) </string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Tank B ( HP : 100 , STR : 1 , V : 3 )  </string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Tank C ( HP : 150 , STR : 5 , V : 1 ) </string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Tank D ( HP : 120 , STR : 2 , V : 2 ) </string>
+     <string>Yellow</string>
     </property>
    </item>
   </widget>

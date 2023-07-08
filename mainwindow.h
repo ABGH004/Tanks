@@ -22,7 +22,7 @@ public:
 signals:
     void passInfo(int HP, int Strength, int Velocity, QString name);
 public slots:
-
+    void restartGame();
     void getInf(int HP, int Strength, int Velocity, QString name);
 private slots:
 

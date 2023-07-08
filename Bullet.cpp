@@ -5,13 +5,14 @@
 #include "Forest.h"
 #include "Tank.h"
 #include <QDebug>
-Bullet::Bullet()
+Bullet::Bullet(int strength)
 {
+    this->strength = strength;
     QMediaPlayer *music = new QMediaPlayer();
     QAudioOutput *audio = new QAudioOutput();
     music->setSource(QUrl("qrc:/Sounds/shootingSound.wav"));
     music->setAudioOutput(audio);
-    audio->setVolume(40);
+    audio->setVolume(0.2);
 
     music->play();
     QTimer *timer = new QTimer();
@@ -66,17 +67,19 @@ void Bullet::move(){
         }
 
         else if(typeid(*(collidingList[i])) == typeid(myBox)){
-            dynamic_cast<myBox*>(collidingList[i])->decrementLives();
+            dynamic_cast<myBox*>(collidingList[i])->decrementLives(strength);
+            scene()->removeItem(this);
+            delete this;
+            return;
+        }else if(typeid(*(collidingList[i])) == typeid(Tank)){
+            dynamic_cast<Tank*>(collidingList[i])->getHit(strength);
             scene()->removeItem(this);
             delete this;
             return;
         }
-        else{
-            qDebug() << "collision occured";
 
-        }
     }
-    setPos(mapToScene(35, 0));
+    setPos(mapToScene(50, 0));
     if(x() > 1350 || x() < 0 || y() < 0 || y() > 750){
         scene()->removeItem(this);
         delete this;

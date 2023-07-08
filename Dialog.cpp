@@ -21,6 +21,9 @@ Dialog::Dialog(QWidget *parent) :
     connect(this, &Dialog::finished, this, [this](){
         emit passInfo1(tank1Info(), tank1Color());
     });
+    connect(this, &Dialog::finished, this, [this](){
+        emit passInfo2(tank2Info(), tank2Color());
+    });
 }
 
 Dialog::~Dialog()
@@ -76,6 +79,8 @@ void Dialog::on_pushButton_clicked()
     connect(this, &Dialog::passText1, gameView, &View::getText1);
     connect(this, &Dialog::passText2, gameView, &View::getText2);
     connect(this, &Dialog::passInfo1, gameView, &View::getInfo1);
+    connect(this, &Dialog::passInfo2, gameView, &View::getInfo2);
+    connect(gameView, &View::restartGame, this, &Dialog::getRestart);
 
     close();
 }
@@ -86,4 +91,9 @@ void Dialog::getInfo(int HP, int Strength, int Velocity, QString name)
         return;
     ui->comboBox_4->addItem(name + " ( HP : " + QString::number(HP) + " , Str : " + QString::number(Strength) + " , V : " + QString::number(Velocity) + " )");
     ui->comboBox_5->addItem(name + " ( HP : " + QString::number(HP) + " , Str : " + QString::number(Strength) + " , V : " + QString::number(Velocity) + " )");
+}
+
+void Dialog::getRestart()
+{
+    emit restart();
 }
