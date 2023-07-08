@@ -6,14 +6,21 @@ Tank::Tank(qreal xPos, qreal yPos)
 
     setFlags(ItemIsFocusable | ItemSendsScenePositionChanges);
     setFocus();
-    QTimer * timer = new QTimer();
+    timer = new QTimer();
     setPos(xPos, yPos);
     setTransformOriginPoint(boundingRect().center() + QPoint(-20, -20));
     timer->start(10);
     connect(timer, SIGNAL(timeout()), this, SLOT(collision()));
     connect(this, &Tank::destroyed, this, [this](){
-        gameOver();
+        emit gameOver();
     });
+}
+
+Tank::~Tank()
+{
+    delete timer;
+    delete music;
+    delete audio;
 }
 
 QRectF Tank::boundingRect() const
@@ -34,14 +41,14 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QPainterPath body;
     body.setFillRule(Qt::WindingFill);
 
-    body.addRect(15, 4, 48, 40);
+    body.addRect(15, 4, 40, 35);
 
     QPainterPath canon;
-    canon.addRect(48, 19, 25, 10);
+    canon.addRect(40, 17, 25, 10);
     QPainterPath wheel1;
-    wheel1.addRect(25, 0, 30, 4);
+    wheel1.addRect(20, 0, 30, 4);
     QPainterPath wheel2;
-    wheel2.addRect(25, 44, 30, 4);
+    wheel2.addRect(20, 39, 30, 4);
 
     painter->setRenderHint(QPainter::Antialiasing);
     if(color == "Red")
@@ -117,10 +124,10 @@ QPainterPath Tank::shape() const
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
-    path.addRect(15, 4, 48, 40);
-    path.addRect(48, 19, 25, 10);
-    path.addRect(25, 0, 30, 4);
-    path.addRect(25, 44, 30, 4);
+    path.addRect(15, 4, 40, 35);
+//    path.addRect(40, 17, 25, 10);
+    path.addRect(20, 0, 30, 4);
+    path.addRect(20, 39, 30, 4);
     return path;
 }
 
@@ -182,8 +189,8 @@ QVariant Tank::itemChange(GraphicsItemChange change, const QVariant &value)
 
 void Tank::getHit(int bulletStr)
 {
-    QMediaPlayer *music = new QMediaPlayer();
-    QAudioOutput *audio = new QAudioOutput();
+    music = new QMediaPlayer();
+    audio = new QAudioOutput();
     music->setSource(QUrl("qrc:/Sounds/hitSound.wav"));
     music->setAudioOutput(audio);
     audio->setVolume(0.2);

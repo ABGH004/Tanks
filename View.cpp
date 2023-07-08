@@ -1,56 +1,72 @@
 #include "View.h"
-//#include "Map.h"
+#include "Map.h"
 View::View()
 {
     scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, 1350, 750);
+    scene->setSceneRect(0, 0, 1620, 880);
     setScene(scene);
-    setFixedSize(1350, 750);
+    setFixedSize(1620, 880);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    QMediaPlayer *music = new QMediaPlayer();
-    QAudioOutput *audio = new QAudioOutput();
-    music->setSource(QUrl("qrc:/Sounds/startsound.wav"));
-    audio->setVolume(0.7);
-    music->setAudioOutput(audio);
-    music->play();
+    music1 = new QMediaPlayer();
+    audio1 = new QAudioOutput();
+    music1->setSource(QUrl("qrc:/Sounds/startsound.wav"));
+    audio1->setVolume(0.7);
+    music1->setAudioOutput(audio1);
+    music1->play();
 
-    tankA = new Tank(100, 100);
+    tankA = new Tank(200, 400);
     tankB = new Tank(1200, 100);
     connect(tankA, SIGNAL(gameOver()), this, SLOT(playerBWon()));
     connect(tankB, SIGNAL(gameOver()), this, SLOT(playerAWon()));
 
-    Bricks *b = new Bricks(1000, 500);
-    myBox *bx = new myBox(500, 500);
-    Forest *f = new Forest(1000, 100);
     playerA = new QLabel(this);
     playerA->setFont(QFont("arial", 20));
     playerA->setAlignment(Qt::AlignHCenter | Qt::AlignLeft);
-    playerA->setGeometry(0, 0, 200, 100);
+    playerA->setGeometry(0, 20, 200, 100);
     playerA->setFixedWidth(200);
 
     playerB = new QLabel(this);
     playerB->setFont(QFont("arial", 20));
     playerB->setAlignment(Qt::AlignHCenter | Qt::AlignLeft);
-    playerB->setGeometry(1150, 0, 200, 100);
+    playerB->setGeometry(1420, 20, 200, 100);
     playerB->setFixedWidth(200);
 
     scene->addItem(tankA);
     scene->addItem(tankB);
-    scene->addItem(b);
-    scene->addItem(bx);
-    scene->addItem(f);
+
+
+
+
+
+    Map *m = new Map(scene);
+
+
+}
+
+View::~View()
+{
+    delete scene;
+    delete playerA;
+    delete playerB;
+    delete tankA;
+    delete tankB;
+    delete music1;
+    delete music2;
+    delete audio1;
+    delete audio2;
+
 }
 
 void View::playerBWon()
 {
-    QMediaPlayer *music = new QMediaPlayer();
-    QAudioOutput *audio = new QAudioOutput();
-    music->setSource(QUrl("qrc:/Sounds/winnerMusic.wav"));
-    audio->setVolume(1.0);
-    music->setAudioOutput(audio);
+    music2 = new QMediaPlayer();
+    audio2 = new QAudioOutput();
+    music2->setSource(QUrl("qrc:/Sounds/winnerMusic.wav"));
+    audio2->setVolume(1.0);
+    music2->setAudioOutput(audio2);
 
-    music->play();
+    music2->play();
     QMessageBox messageBox;
     messageBox.setMinimumSize(1600, 1300);
     messageBox.critical(0, "GAMEOVER", playerB->text() + " Won!!!");
@@ -62,12 +78,12 @@ void View::playerBWon()
 
 void View::playerAWon()
 {
-    QMediaPlayer *music = new QMediaPlayer();
-    QAudioOutput *audio = new QAudioOutput();
-    music->setSource(QUrl("qrc:/Sounds/winnerMusic.wav"));
-    audio->setVolume(1.0);
-    music->setAudioOutput(audio);
-    music->play();
+    music2 = new QMediaPlayer();
+    audio2 = new QAudioOutput();
+    music2->setSource(QUrl("qrc:/Sounds/winnerMusic.wav"));
+    audio2->setVolume(1.0);
+    music2->setAudioOutput(audio2);
+    music2->play();
     QMessageBox messageBox;
     messageBox.critical(0, "GAMEOVER", playerA->text() + " Won!!!");
     messageBox.setFixedSize(600,300);

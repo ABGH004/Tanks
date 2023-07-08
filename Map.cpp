@@ -1,34 +1,32 @@
 #include "Map.h"
 #include "Bricks.h"
-//#include "Box.h"
+#include "myBox.h"
 //#include "Forest.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <QGraphicsScene>
+#include <QFile>
 
-Map::Map(char* mapName)
+Map::Map(QGraphicsScene*scene)
 {
-
-    this->mapName = mapName;
-    std::ifstream file;
-    file.open(mapName);
-    std::string array[13][27];
-    std::string x;
-    if(file){
+    QFile file1(":/Maps/map_3.txt");
+    QString array[13][27];
+    if(file1.open(QIODevice::ReadOnly)){
         for(int j = 0; j < 13; ++j){
-            std::getline(file, x);
+            QString line = file1.readLine();
             for(int i = 0; i < 54; ++++i){
-                array[j][i/2] = x[i];
+                array[j][i/2] = line[i];
             }
         }
     }
     for(int i = 0; i < 13; ++i)
         for(int j = 0; j < 27; ++j){
             if(array[i][j] == "1"){
-                QImage a(":/Images/bricks.png");
+                Bricks *b = new Bricks(j*60, 100 + i*60);
+                scene->addItem(b);
+
+            }
+            else if(array[i][j] == "2"){
+                myBox *bx = new myBox(j*60, 100 + i*60);
+                scene->addItem(bx);
 
             }
         }
-
 }

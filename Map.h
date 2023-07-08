@@ -2,14 +2,16 @@
 #define MAP_H
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include <QWidget>
 #include <QPainter>
-class Map : public QObject, public QGraphicsPixmapItem, public QPainter
+#include <QGraphicsRectItem>
+
+#include <QGraphicsScene>
+class Map : public QWidget
 {
     Q_OBJECT
-private:
-    char* mapName;
 public:
-    Map(char*);
+    Map(QGraphicsScene*);
 };
 
 #endif // MAP_H

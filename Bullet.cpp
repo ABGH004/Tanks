@@ -80,7 +80,7 @@ void Bullet::move(){
 
     }
     setPos(mapToScene(50, 0));
-    if(x() > 1350 || x() < 0 || y() < 0 || y() > 750){
+    if(x() > 1620 || x() < 0 || y() < 0 || y() > 880){
         scene()->removeItem(this);
         delete this;
     }

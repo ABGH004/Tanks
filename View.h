@@ -9,22 +9,24 @@
 #include <QLabel>
 #include <QMessageBox>
 #include "Tank.h"
-#include "Bricks.h"
-#include "myBox.h"
-#include "Forest.h"
 class View : public QGraphicsView
 {
     Q_OBJECT
 private:
     QGraphicsScene * scene;
-    QTimer* viewTimer;
+
     QLabel *playerA;
     QLabel *playerB;
+    QMediaPlayer* music1;
+    QAudioOutput* audio1;
+
+    QMediaPlayer* music2;
+    QAudioOutput* audio2;
     Tank *tankA;
     Tank *tankB;
 public:
-
     explicit View();
+    ~View();
 public slots:
     void playerAWon();
     void playerBWon();

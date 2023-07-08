@@ -20,8 +20,12 @@ private:
     int HP;
     int strength;
     QString color;
+    QTimer * timer;
+    QMediaPlayer *music;
+    QAudioOutput *audio;
 public:
     Tank(qreal, qreal);
+    ~Tank();
     void setInfo(int HP, int velocity, int strength, QString color);
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
