@@ -46,8 +46,8 @@
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>250</y>
+     <x>90</x>
+     <y>270</y>
      <width>150</width>
      <height>30</height>
     </rect>
@@ -86,9 +86,9 @@
   <widget class="QComboBox" name="comboBox_4">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>250</y>
-     <width>200</width>
+     <x>280</x>
+     <y>270</y>
+     <width>281</width>
      <height>30</height>
     </rect>
    </property>
@@ -99,30 +99,30 @@
    </property>
    <item>
     <property name="text">
-     <string>Tank A (HP:3, STR:3, V:2) </string>
+     <string>Tank A ( HP : 135 , STR : 3 , V : 2 ) </string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Tank B (HP:2, STR:1, V:5) </string>
+     <string>Tank B ( HP : 100 , STR : 1 , V : 3 )  </string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Tank C (HP:5, STR:5, V:1) </string>
+     <string>Tank C ( HP : 150 , STR : 5 , V : 1 ) </string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Tank D (HP:4, STR:2, V:3) </string>
+     <string>Tank D ( HP : 120 , STR : 2 , V : 2 ) </string>
     </property>
    </item>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>120</y>
+     <x>80</x>
+     <y>140</y>
      <width>61</width>
      <height>41</height>
     </rect>
@@ -139,8 +139,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>210</y>
+     <x>280</x>
+     <y>230</y>
      <width>61</width>
      <height>41</height>
     </rect>
@@ -157,8 +157,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>210</y>
+     <x>90</x>
+     <y>230</y>
      <width>61</width>
      <height>41</height>
     </rect>
@@ -175,8 +175,8 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>940</x>
-     <y>120</y>
+     <x>870</x>
+     <y>140</y>
      <width>61</width>
      <height>41</height>
     </rect>
@@ -193,8 +193,8 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>1080</x>
-     <y>210</y>
+     <x>1010</x>
+     <y>230</y>
      <width>61</width>
      <height>41</height>
     </rect>
@@ -211,8 +211,8 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>890</x>
-     <y>210</y>
+     <x>820</x>
+     <y>230</y>
      <width>61</width>
      <height>41</height>
     </rect>
@@ -229,8 +229,8 @@
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>20</y>
+     <x>200</x>
+     <y>40</y>
      <width>81</width>
      <height>41</height>
     </rect>
@@ -242,8 +242,8 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>1070</x>
-     <y>20</y>
+     <x>1000</x>
+     <y>40</y>
      <width>101</width>
      <height>41</height>
     </rect>
@@ -260,8 +260,8 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>990</x>
-     <y>130</y>
+     <x>920</x>
+     <y>150</y>
      <width>261</width>
      <height>41</height>
     </rect>
@@ -270,8 +270,8 @@
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>130</y>
+     <x>130</x>
+     <y>150</y>
      <width>261</width>
      <height>41</height>
     </rect>
@@ -280,8 +280,8 @@
   <widget class="QComboBox" name="comboBox_2">
    <property name="geometry">
     <rect>
-     <x>890</x>
-     <y>250</y>
+     <x>820</x>
+     <y>270</y>
      <width>150</width>
      <height>30</height>
     </rect>
@@ -320,9 +320,9 @@
   <widget class="QComboBox" name="comboBox_5">
    <property name="geometry">
     <rect>
-     <x>1080</x>
-     <y>250</y>
-     <width>200</width>
+     <x>1010</x>
+     <y>270</y>
+     <width>281</width>
      <height>30</height>
     </rect>
    </property>
@@ -333,22 +333,22 @@
    </property>
    <item>
     <property name="text">
-     <string>Tank A (HP:3, STR:3, V:2) </string>
+     <string>Tank A ( HP : 135 , STR : 3 , V : 2 ) </string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Tank B (HP:2, STR:1, V:5) </string>
+     <string>Tank B ( HP : 100 , STR : 1 , V : 3 )  </string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Tank C (HP:5, STR:5, V:1) </string>
+     <string>Tank C ( HP : 150 , STR : 5 , V : 1 ) </string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Tank D (HP:4, STR:2, V:3) </string>
+     <string>Tank D ( HP : 120 , STR : 2 , V : 2 ) </string>
     </property>
    </item>
   </widget>

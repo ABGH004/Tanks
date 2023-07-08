@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Dialog.h"
+#include "NewTank.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -20,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     music->play();
     music->setLoops(QMediaPlayer::Infinite);
 
-
 }
 
 MainWindow::~MainWindow()
@@ -34,14 +34,32 @@ void MainWindow::on_pushButton_clicked()
 {
     auto optionView = new Dialog();
 
-    optionView->show();
+    connect(this, &MainWindow::passInfo, optionView, &Dialog::getInfo);
 
+    emit passInfo(HP, Strength, Velocity, name);
+    optionView->show();
     close();
+}
+
+void MainWindow::getInf(int HP, int Strength, int Velocity, QString name)
+{
+    this->HP = HP;
+    this->Strength = Strength;
+    this->Velocity = Velocity;
+    this->name = name;
 }
 
 
 void MainWindow::on_pushButton_3_clicked()
 {
     close();
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    auto newTank = new NewTank();
+    connect(newTank, &NewTank::passNew, this, &MainWindow::getInf);
+    newTank->show();
 }
 

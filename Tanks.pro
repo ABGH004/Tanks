@@ -14,6 +14,7 @@ SOURCES += \
     Dialog.cpp \
     Forest.cpp \
     Map.cpp \
+    NewTank.cpp \
     Tank.cpp \
     View.cpp \
     main.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     Dialog.h \
     Forest.h \
     Map.h \
+    NewTank.h \
     Tank.h \
     View.h \
     mainwindow.h \
@@ -42,4 +44,5 @@ RESOURCES += \
 RC_ICONS = icon.ico
 FORMS += \
     Dialog.ui \
+    NewTank.ui \
     mainwindow.ui

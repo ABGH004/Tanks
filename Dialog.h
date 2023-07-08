@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QMessageBox>
 namespace Ui {
 class Dialog;
 }
@@ -15,7 +16,16 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-
+    int tank1Info();
+    int tank2Info();
+    QString tank1Color();
+    QString tank2Color();
+signals:
+    void passText1(QString playerName);
+    void passText2(QString playerName);
+    void passInfo1(int info, QString color);
+public slots:
+    void getInfo(int HP, int Strength, int Velocity, QString name);
 private slots:
     void on_pushButton_clicked();
 
