@@ -24,6 +24,9 @@ Dialog::Dialog(QWidget *parent) :
     connect(this, &Dialog::finished, this, [this](){
         emit passInfo2(tank2Info(), tank2Color());
     });
+    connect(this, &Dialog::finished, this, [this](){
+        emit passMap(ui->comboBox_3->currentText());
+    });
 }
 
 Dialog::~Dialog()
@@ -81,7 +84,7 @@ void Dialog::on_pushButton_clicked()
     connect(this, &Dialog::passInfo1, gameView, &View::getInfo1);
     connect(this, &Dialog::passInfo2, gameView, &View::getInfo2);
     connect(gameView, &View::restartGame, this, &Dialog::getRestart);
-
+    connect(this, &Dialog::passMap, gameView, &View::getMap);
     close();
 }
 

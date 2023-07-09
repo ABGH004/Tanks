@@ -18,5 +18,6 @@
         <file>map_1.txt</file>
         <file>map_2.txt</file>
         <file>map_3.txt</file>
+        <file>map_4.txt</file>
     </qresource>
 </RCC>
