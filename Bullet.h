@@ -8,11 +8,14 @@
 #include <QAudioOutput>
 #include <QMediaPlayer>
 #include <QList>
+#include <QGraphicsScene>
+
 class Bullet : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
     Bullet(int strength);
+    ~Bullet();
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
@@ -21,6 +24,9 @@ public slots:
     void move();
 private:
     int strength;
+    QTimer *timer;
+    QMediaPlayer *music;
+    QAudioOutput *audio;
 };
 
 #endif // BULLET_H

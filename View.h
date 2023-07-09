@@ -9,25 +9,34 @@
 #include <QLabel>
 #include <QMessageBox>
 #include "Tank.h"
+#include <QKeyEvent>
+#include <QSet>
+#include "Map.h"
+
 class View : public QGraphicsView
 {
     Q_OBJECT
 private:
     QGraphicsScene * scene;
-
+    QTimer *timer;
+    QTimer *bulletTimer;
     QLabel *playerA;
     QLabel *playerB;
     QMediaPlayer* music1;
     QAudioOutput* audio1;
-
+    QSet<int> keysPressed;
     QMediaPlayer* music2;
     QAudioOutput* audio2;
     Tank *tankA;
     Tank *tankB;
+    Map *map;
 public:
     explicit View();
+    void keyPressEvent(QKeyEvent*);
+    void keyReleaseEvent(QKeyEvent*);
     ~View();
 public slots:
+    void getMap(QString mapName);
     void playerAWon();
     void playerBWon();
     void getText1(QString playerName);

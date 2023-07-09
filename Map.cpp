@@ -1,12 +1,9 @@
 #include "Map.h"
-#include "Bricks.h"
-#include "myBox.h"
-//#include "Forest.h"
-#include <QFile>
 
-Map::Map(QGraphicsScene*scene)
+Map::Map(QGraphicsScene*scene, QString name)
 {
-    QFile file1(":/Maps/map_3.txt");
+
+    QFile file1(":/Maps/"+name+".txt");
     QString array[13][27];
     if(file1.open(QIODevice::ReadOnly)){
         for(int j = 0; j < 13; ++j){
@@ -28,5 +25,16 @@ Map::Map(QGraphicsScene*scene)
                 scene->addItem(bx);
 
             }
+            else if(array[i][j] == "3"){
+                Forest *f = new Forest(j*60, 100 + i*60);
+                scene->addItem(f);
+
+            }
         }
+}
+
+void Map::setName(QString name)
+{
+    this->name = name;
+
 }

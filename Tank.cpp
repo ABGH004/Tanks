@@ -1,6 +1,5 @@
 #include "Tank.h"
 #include "Bullet.h"
-#include <QGraphicsScene>
 Tank::Tank(qreal xPos, qreal yPos)
 {
 
@@ -70,55 +69,6 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 }
 
-void Tank::keyPressEvent(QKeyEvent* keyEvent){
-    QList<QGraphicsItem*> collidingList = collidingItems();
-    for(QGraphicsItem* t : collidingList){
-        if(typeid(*t) == typeid(Bullet))
-            continue;
-        else
-            setRotation(90);
-    }
-    switch(keyEvent->key()){
-        case(Qt::Key_D):
-            setPos(x() + velocity*5, y());
-            setRotation(360);
-            break;
-        case(Qt::Key_A):
-            setPos(x() - velocity*5, y());
-            setRotation(180);
-            break;
-
-        case(Qt::Key_W):
-            setPos(x(), y() - velocity*5);
-            setRotation(270);
-            break;
-        case(Qt::Key_S):
-            setPos(x(), y() + velocity*5);
-            setRotation(90);
-            break;
-        case(Qt::Key_C):
-            Bullet *bullet = new Bullet(strength);
-            bullet->setPos(mapToScene(85, 22.5));
-            bullet->setRotation(rotation());
-            scene()->addItem(bullet);
-    }
-//    if(keyEvent->key() == Qt::Key_Right){
-//        setPos(x() + velocity*3, y());
-//        setRotation(180);
-//    }
-//    if(keyEvent->key() == Qt::Key_Left){
-//        setPos(x() - velocity*3, y());
-//        setRotation(360);
-//    }
-//    if(keyEvent->key() == Qt::Key_Up){
-//        setPos(x(), y() - velocity*3);
-//        setRotation(90);
-//    }
-//    if(keyEvent->key() == Qt::Key_Down){
-//        setPos(x(), y() + velocity*3);
-//        setRotation(270);
-    //    }
-}
 
 QPainterPath Tank::shape() const
 {
@@ -138,7 +88,7 @@ void Tank::collision()
     for(QGraphicsItem* t : collidingList){
 
         if(typeid(*t) == typeid(Bullet))
-            continue;//////TO DO
+            continue;
         else{
             if(x()+50 <= t->x()){
                 setPos(x() - 20, y());
@@ -153,13 +103,48 @@ void Tank::collision()
     }
 
 }
+
+void Tank::up()
+{
+
+    setPos(x(), y() - velocity*5);
+    setRotation(270);
+}
+
+void Tank::down()
+{
+
+    setPos(x(), y() + velocity*5);
+    setRotation(90);
+}
+
+void Tank::left()
+{
+
+    setPos(x() - velocity*5, y());
+    setRotation(180);
+}
+
+void Tank::right()
+{
+    setPos(x() + velocity*5, y());
+    setRotation(360);
+}
+
+void Tank::shoot()
+{
+
+    Bullet *bullet = new Bullet(strength);
+    bullet->setPos(mapToScene(85, 22.5));
+    bullet->setRotation(rotation());
+    scene()->addItem(bullet);
+}
 QVariant Tank::itemChange(GraphicsItemChange change, const QVariant &value)
 {
 
     if (change == ItemPositionChange && scene()) {
         // value is the new position.
         QPointF newPos = value.toPointF();
-        QRectF rect = scene()->sceneRect();
         if(x() < 20){
             newPos.setX(20);
             newPos.setY(newPos.y());
@@ -177,12 +162,7 @@ QVariant Tank::itemChange(GraphicsItemChange change, const QVariant &value)
             newPos.setY(scene()->height()+ 20 - boundingRect().height());
         }
         return newPos;
-        //        if (!rect.contains(newPos)) {
-//            // Keep the item inside the scene rect.
-//            newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
-//            newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
-//            return newPos;
-//        }
+
     }
     return QGraphicsItem::itemChange(change, value);
 }

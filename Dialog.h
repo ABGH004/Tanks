@@ -5,6 +5,7 @@
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QMessageBox>
+
 namespace Ui {
 class Dialog;
 }
@@ -25,6 +26,7 @@ signals:
     void passText2(QString playerName);
     void passInfo1(int info, QString color);
     void passInfo2(int info, QString color);
+    void passMap(QString mapName);
     void restart();
 public slots:
     void getInfo(int HP, int Strength, int Velocity, QString name);

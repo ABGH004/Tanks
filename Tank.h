@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QGraphicsScene>
+
 class Tank : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
@@ -29,7 +31,6 @@ public:
     void setInfo(int HP, int velocity, int strength, QString color);
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-    void keyPressEvent(QKeyEvent* keyEvent);
     QPainterPath shape() const;
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
     void getHit(int bulletStr);
@@ -37,6 +38,11 @@ signals:
     void gameOver();
 public slots:
     void collision();
+    void up();
+    void down();
+    void left();
+    void right();
+    void shoot();
 signals:
 
 };

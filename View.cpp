@@ -1,13 +1,14 @@
 #include "View.h"
-#include "Map.h"
 View::View()
 {
     scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, 1620, 880);
     setScene(scene);
+
     setFixedSize(1620, 880);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     music1 = new QMediaPlayer();
     audio1 = new QAudioOutput();
     music1->setSource(QUrl("qrc:/Sounds/startsound.wav"));
@@ -15,10 +16,16 @@ View::View()
     music1->setAudioOutput(audio1);
     music1->play();
 
-    tankA = new Tank(200, 400);
-    tankB = new Tank(1200, 100);
+    timer = new QTimer();
+    timer->start(70);
+
+    tankA = new Tank(rand()%(1620 - 60) + 60, rand()%(880 - 160) + 160);
+    tankB = new Tank(rand()%(1620 - 60) + 60, rand()%(880 - 160) + 160);
+
     connect(tankA, SIGNAL(gameOver()), this, SLOT(playerBWon()));
     connect(tankB, SIGNAL(gameOver()), this, SLOT(playerAWon()));
+
+    tankB->setRotation(180);
 
     playerA = new QLabel(this);
     playerA->setFont(QFont("arial", 20));
@@ -35,14 +42,89 @@ View::View()
     scene->addItem(tankA);
     scene->addItem(tankB);
 
-
-
-
-
-    Map *m = new Map(scene);
-
+//    map = new Map(scene);
 
 }
+
+void View::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key()){
+        case Qt::Key_W:
+            connect(timer, SIGNAL(timeout()), tankA, SLOT(up()));
+            break;
+        case Qt::Key_S:
+            connect(timer, SIGNAL(timeout()), tankA, SLOT(down()));
+            break;
+        case Qt::Key_A:
+            connect(timer, SIGNAL(timeout()), tankA, SLOT(left()));
+            break;
+        case Qt::Key_D:
+            connect(timer, SIGNAL(timeout()), tankA, SLOT(right()));
+            break;
+        case Qt::Key_Left:
+            connect(timer, SIGNAL(timeout()), tankB, SLOT(left()));
+            break;
+        case Qt::Key_Right:
+            connect(timer, SIGNAL(timeout()), tankB, SLOT(right()));
+            break;
+        case Qt::Key_Up:
+            connect(timer, SIGNAL(timeout()), tankB, SLOT(up()));
+            break;
+        case Qt::Key_Down:
+            connect(timer, SIGNAL(timeout()), tankB, SLOT(down()));
+            break;
+        case Qt::Key_C:
+            connect(timer, SIGNAL(timeout()), tankA, SLOT(shoot()));
+            break;
+        case Qt::Key_K:
+            connect(timer, SIGNAL(timeout()), tankB, SLOT(shoot()));
+            break;
+        default:
+            break;
+
+        }
+}
+
+void View::keyReleaseEvent(QKeyEvent * event)
+{
+    keysPressed.remove(event->key());
+    switch(event->key()){
+    case Qt::Key_W:
+        disconnect(timer, SIGNAL(timeout()), tankA, SLOT(up()));
+        break;
+    case Qt::Key_S:
+        disconnect(timer, SIGNAL(timeout()), tankA, SLOT(down()));
+        break;
+    case Qt::Key_A:
+        disconnect(timer, SIGNAL(timeout()), tankA, SLOT(left()));
+        break;
+    case Qt::Key_D:
+        disconnect(timer, SIGNAL(timeout()), tankA, SLOT(right()));
+        break;
+    case Qt::Key_Left:
+        disconnect(timer, SIGNAL(timeout()), tankB, SLOT(left()));
+        break;
+    case Qt::Key_Right:
+        disconnect(timer, SIGNAL(timeout()), tankB, SLOT(right()));
+        break;
+    case Qt::Key_Up:
+        disconnect(timer, SIGNAL(timeout()), tankB, SLOT(up()));
+        break;
+    case Qt::Key_Down:
+        disconnect(timer, SIGNAL(timeout()), tankB, SLOT(down()));
+        break;
+    case Qt::Key_C:
+        disconnect(timer, SIGNAL(timeout()), tankA, SLOT(shoot()));
+        break;
+    case Qt::Key_K:
+        disconnect(timer, SIGNAL(timeout()), tankB, SLOT(shoot()));
+        break;
+    default:
+        break;
+
+    }
+}
+
 
 View::~View()
 {
@@ -55,7 +137,14 @@ View::~View()
     delete music2;
     delete audio1;
     delete audio2;
+    delete map;
 
+}
+
+void View::getMap(QString mapName)
+{
+//    map->setName(mapName);
+    map = new Map(scene, mapName);
 }
 
 void View::playerBWon()
@@ -65,13 +154,15 @@ void View::playerBWon()
     music2->setSource(QUrl("qrc:/Sounds/winnerMusic.wav"));
     audio2->setVolume(1.0);
     music2->setAudioOutput(audio2);
-
     music2->play();
+
     QMessageBox messageBox;
     messageBox.setMinimumSize(1600, 1300);
     messageBox.critical(0, "GAMEOVER", playerB->text() + " Won!!!");
     messageBox.setFixedSize(1600,1300);
+
     close();
+
     emit restartGame();
 
 }
@@ -84,10 +175,13 @@ void View::playerAWon()
     audio2->setVolume(1.0);
     music2->setAudioOutput(audio2);
     music2->play();
+
     QMessageBox messageBox;
     messageBox.critical(0, "GAMEOVER", playerA->text() + " Won!!!");
     messageBox.setFixedSize(600,300);
+
     close();
+
     emit restartGame();
 }
 
