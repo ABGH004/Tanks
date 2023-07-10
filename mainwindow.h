@@ -2,11 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
 #include <QMediaPlayer>
 #include <QAudioOutput>
-#include "Dialog.h"
-#include "NewTank.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -21,9 +19,11 @@ public:
 
 signals:
     void passInfo(int HP, int Strength, int Velocity, QString name);
+    void passMap(QString);
 public slots:
     void restartGame();
     void getInf(int HP, int Strength, int Velocity, QString name);
+    void getMap(QString mapName);
 private slots:
 
     void on_pushButton_clicked();
@@ -31,11 +31,14 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     int HP;
     int Strength;
     int Velocity;
     QString name;
+    QString mapName;
     Ui::MainWindow *ui;
     QMediaPlayer *music;
     QAudioOutput *audio;

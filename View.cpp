@@ -42,7 +42,6 @@ View::View()
     scene->addItem(tankA);
     scene->addItem(tankB);
 
-//    map = new Map(scene);
 
 }
 
@@ -128,6 +127,7 @@ void View::keyReleaseEvent(QKeyEvent * event)
 
 View::~View()
 {
+    delete timer;
     delete scene;
     delete playerA;
     delete playerB;
@@ -143,7 +143,6 @@ View::~View()
 
 void View::getMap(QString mapName)
 {
-//    map->setName(mapName);
     map = new Map(scene, mapName);
 }
 

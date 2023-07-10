@@ -2,14 +2,29 @@
 
 Map::Map(QGraphicsScene*scene, QString name)
 {
-
+    bool isNew = false;
     QFile file1(":/Maps/"+name+".txt");
+    if(!file1.exists()){
+        isNew = true;
+    }
+    QFile file2(name + ".txt");
     QString array[13][27];
-    if(file1.open(QIODevice::ReadOnly)){
-        for(int j = 0; j < 13; ++j){
-            QString line = file1.readLine();
-            for(int i = 0; i < 54; ++++i){
-                array[j][i/2] = line[i];
+    if(!isNew){
+        if(file1.open(QIODevice::ReadOnly)){
+            for(int j = 0; j < 13; ++j){
+                QString line = file1.readLine();
+                for(int i = 0; i < 54; ++++i){
+                    array[j][i/2] = line[i];
+                }
+            }
+        }
+    }else{
+        if(file2.open(QIODevice::ReadOnly)){
+            for(int j = 0; j < 13; ++j){
+                QString line = file2.readLine();
+                for(int i = 0; i < 54; ++++i){
+                    array[j][i/2] = line[i];
+                }
             }
         }
     }
@@ -31,10 +46,9 @@ Map::Map(QGraphicsScene*scene, QString name)
 
             }
         }
+    if(isNew){
+        QFile::remove(name + ".txt");
+    }
 }
 
-void Map::setName(QString name)
-{
-    this->name = name;
 
-}

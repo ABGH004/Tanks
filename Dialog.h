@@ -31,6 +31,7 @@ signals:
 public slots:
     void getInfo(int HP, int Strength, int Velocity, QString name);
     void getRestart();
+    void getMap(QString);
 private slots:
     void on_pushButton_clicked();
 

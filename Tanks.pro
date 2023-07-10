@@ -13,7 +13,12 @@ SOURCES += \
     Bullet.cpp \
     Dialog.cpp \
     Forest.cpp \
+    GridScene.cpp \
     Map.cpp \
+    MovableBox.cpp \
+    MovableBricks.cpp \
+    MovableForest.cpp \
+    NewMap.cpp \
     NewTank.cpp \
     Tank.cpp \
     View.cpp \
@@ -26,7 +31,12 @@ HEADERS += \
     Bullet.h \
     Dialog.h \
     Forest.h \
+    GridScene.h \
     Map.h \
+    MovableBox.h \
+    MovableBricks.h \
+    MovableForest.h \
+    NewMap.h \
     NewTank.h \
     Tank.h \
     View.h \

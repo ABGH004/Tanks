@@ -15,10 +15,7 @@ class Map : public QWidget
     Q_OBJECT
 public:
     Map(QGraphicsScene*, QString);
-    void setName(QString name);
 private:
-    QFile file1;
-    QString name;
 };
 
 #endif // MAP_H

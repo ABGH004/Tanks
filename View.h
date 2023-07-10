@@ -19,7 +19,6 @@ class View : public QGraphicsView
 private:
     QGraphicsScene * scene;
     QTimer *timer;
-    QTimer *bulletTimer;
     QLabel *playerA;
     QLabel *playerB;
     QMediaPlayer* music1;

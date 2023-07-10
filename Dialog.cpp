@@ -27,6 +27,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(this, &Dialog::finished, this, [this](){
         emit passMap(ui->comboBox_3->currentText());
     });
+    ui->label_9->setStyleSheet("QLabel{color:white;}");
 }
 
 Dialog::~Dialog()
@@ -90,7 +91,7 @@ void Dialog::on_pushButton_clicked()
 
 void Dialog::getInfo(int HP, int Strength, int Velocity, QString name)
 {
-    if(HP == 0)
+    if(HP < 100 || HP > 150 || Velocity > 3 || Velocity < 1 || Strength > 5 || Strength < 1)
         return;
     ui->comboBox_4->addItem(name + " ( HP : " + QString::number(HP) + " , Str : " + QString::number(Strength) + " , V : " + QString::number(Velocity) + " )");
     ui->comboBox_5->addItem(name + " ( HP : " + QString::number(HP) + " , Str : " + QString::number(Strength) + " , V : " + QString::number(Velocity) + " )");
@@ -100,3 +101,13 @@ void Dialog::getRestart()
 {
     emit restart();
 }
+
+void Dialog::getMap(QString mapName)
+{
+    if(mapName.isEmpty()){
+        return;
+    }
+    mapName.chop(4);
+    ui->comboBox_3->addItem(mapName);
+}
+
