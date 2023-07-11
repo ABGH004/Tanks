@@ -78,6 +78,15 @@ void Dialog::on_pushButton_clicked()
         messageBox.setFixedSize(500,200);
         return;
     }
+    if(ui->lineEdit->text() == "" || ui->lineEdit->text() == " " ||
+        ui->lineEdit->text() == "\n" || ui->lineEdit->text() == "\t"
+        || ui->lineEdit_2->text() == "" || ui->lineEdit_2->text() == " " ||
+        ui->lineEdit_2->text() == "\n" || ui->lineEdit_2->text() == "\t"){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","You cannot leave Players names empty!!");
+        messageBox.setFixedSize(500,300);
+        return;
+    }
     auto gameView = new View();
     gameView->show();
     connect(this, &Dialog::passText1, gameView, &View::getText1);

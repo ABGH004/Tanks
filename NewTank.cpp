@@ -21,6 +21,13 @@ NewTank::~NewTank()
 
 void NewTank::on_pushButton_clicked()
 {
+    if(ui->lineEdit->text() == "" || ui->lineEdit->text() == " " ||
+        ui->lineEdit->text() == "\n" || ui->lineEdit->text() == "\t"){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","You cannot leave tank name empty!!");
+        messageBox.setFixedSize(500,300);
+        return;
+    }
     emit passNew(ui->spinBox->value(), ui->spinBox_2->value(), ui->spinBox_3->value(), ui->lineEdit->text());
 
     close();

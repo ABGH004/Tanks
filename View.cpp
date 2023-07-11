@@ -19,8 +19,8 @@ View::View()
     timer = new QTimer();
     timer->start(70);
 
-    tankA = new Tank(rand()%(1620 - 60) + 60, rand()%(880 - 160) + 160);
-    tankB = new Tank(rand()%(1620 - 60) + 60, rand()%(880 - 160) + 160);
+    tankA = new Tank(rand()%(810 - 60) + 60, rand()%(820 - 160) + 160);
+    tankB = new Tank(rand()%(1560 - 810) + 810, rand()%(820 - 160) + 160);
 
     connect(tankA, SIGNAL(gameOver()), this, SLOT(playerBWon()));
     connect(tankB, SIGNAL(gameOver()), this, SLOT(playerAWon()));

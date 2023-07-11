@@ -13,6 +13,8 @@
         <file>shootingSound.wav</file>
         <file>winnerMusic.wav</file>
         <file>hitSound.wav</file>
+        <file>boxCrashingSound.wav</file>
+        <file>placingObjects.mp3</file>
     </qresource>
     <qresource prefix="/Maps">
         <file>map_1.txt</file>

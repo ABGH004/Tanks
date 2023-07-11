@@ -3,7 +3,20 @@
 #include "MovableBox.h"
 #include "MovableBricks.h"
 #include "MovableForest.h"
-GridScene::GridScene() :mCellSize(60, 60){}
+GridScene::GridScene() :mCellSize(60, 60){
+    music = new QMediaPlayer();
+    audio = new QAudioOutput();
+    music->setSource(QUrl("qrc:/Sounds/placingObjects.mp3"));
+    music->setAudioOutput(audio);
+    audio->setVolume(0.8);
+}
+
+GridScene::~GridScene()
+{
+    delete music;
+    delete audio;
+
+}
 
 void GridScene::drawBackground(QPainter *painter,QRectF const &rect)
 {
@@ -63,6 +76,8 @@ void GridScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
             removeItem(mDragged);
             delete mDragged;
         }
+
+        music->play();
         int x = floor(mouseEvent->scenePos().x() / mCellSize.width()) * mCellSize.width();
         int y = floor(mouseEvent->scenePos().y() / mCellSize.height()) * mCellSize.height();
         mDragged->setPos(x, y);

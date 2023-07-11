@@ -79,6 +79,12 @@ NewMap::~NewMap()
 
 void NewMap::on_submit_clicked()
 {
+    if(mapName->text() == "" || mapName->text() == " " || mapName->text() == "\n" || mapName->text() == "\t"){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","You cannot leave map name empty!!");
+        messageBox.setFixedSize(500,300);
+        return;
+    }
     QString fileName = mapName->text()+".txt";
     QFile file(fileName);
     QString str;
