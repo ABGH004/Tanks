@@ -47,6 +47,14 @@ NewMap::NewMap()
 
     connect(submit, &QPushButton::clicked, this, &NewMap::on_submit_clicked);
 
+    dismiss = new QPushButton(this);
+    dismiss->setGeometry(1470, 60, 110, 30);
+    dismiss->setFont(QFont("segoe UI", 15));
+    dismiss->setText("Dismiss");
+
+    connect(dismiss, &QPushButton::clicked, this, &NewMap::on_dismiss_clicked);
+
+
     MovableBricks *mb = new MovableBricks(560, 30);
     MovableBox *mbx = new MovableBox(870, 30);
     MovableForest *mf = new MovableForest(1180, 30);
@@ -105,6 +113,11 @@ void NewMap::on_submit_clicked()
     emit passMap(fileName);
     close();
 
+}
+
+void NewMap::on_dismiss_clicked()
+{
+    close();
 }
 
 

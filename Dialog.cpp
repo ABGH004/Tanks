@@ -111,3 +111,10 @@ void Dialog::getMap(QString mapName)
     ui->comboBox_3->addItem(mapName);
 }
 
+
+void Dialog::on_pushButton_2_clicked()
+{
+    close();
+    emit restart();
+}
+

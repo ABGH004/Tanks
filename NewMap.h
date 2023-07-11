@@ -19,6 +19,7 @@ signals:
     void passMap(QString);
 private slots:
     void on_submit_clicked();
+    void on_dismiss_clicked();
 private:
     QLabel *name;
     QLabel *wall;
@@ -26,6 +27,7 @@ private:
     QLabel *forest;
     QLineEdit *mapName;
     QPushButton *submit;
+    QPushButton *dismiss;
     GridScene *scene;
 };
 

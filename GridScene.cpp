@@ -19,6 +19,9 @@ void GridScene::drawBackground(QPainter *painter,QRectF const &rect)
     painter->setPen(QPen(Qt::white));
 
     painter->drawLines(lines.data(), lines.size());
+    painter->setPen(QPen(Qt::black));
+    QLineF separator(QLineF(0, 120, 1620, 120));
+    painter->drawLine(separator);
 }
 
 void GridScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
